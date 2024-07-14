@@ -1,0 +1,27 @@
+{
+  "name": "Teensy4 4 Channel 24 bit TDM Audio",
+  "frameworks": "Arduino",
+  "platforms": "Teensy",
+  "keywords": "sound, audio, effect",
+  "description": "Up to 4 Input/Output Channels 24 Bits 192Khz audio using the AK4619VN codec.",
+  "url": "https://github.com/Lytrix/Teensy_4Chn_24bit_TDM_Audio",
+  "version": "0.1",
+  "export": {
+  },
+  "authors":
+  {
+    "name":  "Eelke Jager, Paul Stoffregen",
+    "maintainer": true
+  },
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/Lytrix"
+  },
+  "dependencies":
+  {
+  },
+  "examples": [
+    "examples/*/*.ino"
+  ]
+}
