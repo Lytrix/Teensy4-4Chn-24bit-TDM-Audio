@@ -102,11 +102,12 @@ static void memcpy_tdm_tx(uint32_t *dest, const uint32_t *src1, const uint32_t *
 
 	// 	dest += 32;
 	// }
-	for (size_t i=0; i < AUDIO_BLOCK_SAMPLES/2; i++) {
+	for (size_t i=0; i < AUDIO_BLOCK_SAMPLES; i++) {
 		*dest++ = *src1++;
 		*dest++ = *src2++;
-		*dest++ = *src1++;
-		*dest++ = *src2++;
+		//*dest++ = *src1++;
+		//*dest++ = *src2++;
+		
 		// *dest = *src1++;
 		// *(dest + 2)=*src2++;
 		// *(dest + 4)=*src1++;

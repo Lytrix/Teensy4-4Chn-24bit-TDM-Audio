@@ -73,16 +73,17 @@ static void memcpy_tdm_rx(uint32_t *dest1, uint32_t *dest2, const uint32_t *src)
 {
 	// uint32_t i, in1, in2;
 
-	for (size_t i=0; i < AUDIO_BLOCK_SAMPLES/2; i++) {
+	for (size_t i=0; i < AUDIO_BLOCK_SAMPLES; i++) {
 	// 	in1 = *src;
 	// 	in2 = *(src+8);
 	// 	src += 16;
 	// 	*dest1++ = (in1 >> 16) | (in2 & 0xFFFF0000);
 	// 	*dest2++ = (in1 << 16) | (in2 & 0x0000FFFF);
+	
 	*dest1++ = *src++;
 	*dest2++ = *src++;
-	*dest1++ = *src++;
-	*dest2++ = *src++;
+	//*dest1++ = *src++;
+	//*dest2++ = *src++;
 	
 	// *dest1++ = *src;
 	// *dest2++ = *(src+2);
