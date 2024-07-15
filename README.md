@@ -4,8 +4,8 @@ This repo is a modification of the [Teensy 4 Audio TDM Library](http://github.co
 
 Pin setup:
 ```  
-  pin  6 : SDIN
-  pin  7 : SDOUT
+  pin  6 : SDIN   // Current setup is Using TDM mode where both ADC's data are going via 1 SDIN.
+  pin  7 : SDOUT  // Same for the 2 DACs data are going via 1 SDIN to SDOUT.
   pin  9 : Test Clock speed pin
   pin 18 : SDA
   pin 19 : SCL
