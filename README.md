@@ -4,17 +4,15 @@ This repo is a modification of the [Teensy 4 Audio TDM Library](http://github.co
 
 Pin setup:
 ```  
-  pin  6 : SDIN   // Current setup is Using TDM mode where both ADC's data are going via 1 SDIN.
-  pin  7 : SDOUT  // Same for the 2 DACs data are going via 1 SDIN to SDOUT.
-  pin  9 : Test Clock speed pin
-  pin 18 : SDA
-  pin 19 : SCL
-  pin 20 : SYNC
-  pin 21 : BICK
-  pin 22 : PWN Power/Reset to program codec
-  pin 23 : MCLK
-  
-
+pin  6 : SDIN   // Current setup is Using TDM mode where both ADC's data are going via 1 SDIN.
+pin  7 : SDOUT  // Same for the 2 DACs data are going via 1 SDIN to SDOUT.
+pin  9 : Test Clock speed pin
+pin 18 : SDA
+pin 19 : SCL
+pin 20 : SYNC
+pin 21 : BICK
+pin 22 : PWN Power/Reset to program codec
+pin 23 : MCLK
 ```
 To work with TDM 24bit 96 or higher both MCLCK and BCK must be running at 24.546Mhz (=128*192000Hz or 256*96000Hz) 
 
