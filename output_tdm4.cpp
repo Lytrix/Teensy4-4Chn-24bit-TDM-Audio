@@ -40,7 +40,7 @@ DMAChannel AudioOutputTDM::dma(false);
 DMAMEM __attribute__((aligned(32)))
 static uint32_t zeros[AUDIO_BLOCK_SAMPLES/2];
 DMAMEM __attribute__((aligned(32)))
-static uint64_t tdm_tx_buffer[AUDIO_BLOCK_SAMPLES];
+static uint32_t tdm_tx_buffer[AUDIO_BLOCK_SAMPLES * AUDIO_CHANNELS];
 
 
 void AudioOutputTDM::begin(void)
@@ -103,11 +103,15 @@ static void memcpy_tdm_tx(uint32_t *dest, const uint32_t *src1, const uint32_t *
 	// 	dest += 32;
 	// }
 	for (size_t i=0; i < AUDIO_BLOCK_SAMPLES/2; i++) {
-		*dest = *src1++;
-		*(dest + 2)=*src2++;
-		*(dest + 4)=*src1++;
-		*(dest + 6)=*src2++;
-		dest += 8;
+		*dest++ = *src1++;
+		*dest++ = *src2++;
+		*dest++ = *src1++;
+		*dest++ = *src2++;
+		// *dest = *src1++;
+		// *(dest + 2)=*src2++;
+		// *(dest + 4)=*src1++;
+		// *(dest + 6)=*src2++;
+		// dest += 8;
 	}
 	
 }
@@ -125,8 +129,8 @@ void AudioOutputTDM::isr(void)
 	if (saddr < (uint32_t)tdm_tx_buffer + sizeof(tdm_tx_buffer) / 2) {
 		// DMA is transmitting the first half of the buffer
 		// so we must fill the second half
-		//dest = tdm_tx_buffer + AUDIO_BLOCK_SAMPLES*8;
-		dest = (uint32_t *)&tdm_tx_buffer[AUDIO_BLOCK_SAMPLES/2];
+		dest = tdm_tx_buffer + AUDIO_BLOCK_SAMPLES*2;
+		//dest = (uint32_t *)&tdm_tx_buffer[AUDIO_BLOCK_SAMPLES*2];
 	} else {
 		// DMA is transmitting the second half of the buffer
 		// so we must fill the first half

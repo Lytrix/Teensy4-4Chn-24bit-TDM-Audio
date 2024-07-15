@@ -32,7 +32,7 @@
 
 
 DMAMEM __attribute__((aligned(32)))
-static uint64_t tdm_rx_buffer[AUDIO_BLOCK_SAMPLES];
+static uint32_t tdm_rx_buffer[AUDIO_BLOCK_SAMPLES * AUDIO_CHANNELS];
 audio_block_t * AudioInputTDM::block_incoming[AUDIO_CHANNELS] = {
 	nullptr, nullptr, nullptr, nullptr
 };
@@ -79,11 +79,16 @@ static void memcpy_tdm_rx(uint32_t *dest1, uint32_t *dest2, const uint32_t *src)
 	// 	src += 16;
 	// 	*dest1++ = (in1 >> 16) | (in2 & 0xFFFF0000);
 	// 	*dest2++ = (in1 << 16) | (in2 & 0x0000FFFF);
-	*dest1++ = *src;
-	*dest2++ = *(src+2);
-	*dest1++ = *(src+4);
-	*dest2++ = *(src+6);
-	src += 8;
+	*dest1++ = *src++;
+	*dest2++ = *src++;
+	*dest1++ = *src++;
+	*dest2++ = *src++;
+	
+	// *dest1++ = *src;
+	// *dest2++ = *(src+2);
+	// *dest1++ = *(src+4);
+	// *dest2++ = *(src+6);
+	// src += 8;
 	}
 }
 
@@ -99,7 +104,8 @@ void AudioInputTDM::isr(void)
 	if (daddr < (uint32_t)tdm_rx_buffer + sizeof(tdm_rx_buffer) / 2) {
 		// DMA is receiving to the first half of the buffer
 		// need to remove data from the second half
-		src = (uint32_t *)&tdm_rx_buffer[AUDIO_BLOCK_SAMPLES/2];
+		//src = (uint32_t *)&tdm_rx_buffer[AUDIO_BLOCK_SAMPLES];
+		src = (uint32_t)tdm_rx_buffer + sizeof(tdm_rx_buffer) / 2;
 	} else {
 		// DMA is receiving to the second half of the buffer
 		// need to remove data from the first half
